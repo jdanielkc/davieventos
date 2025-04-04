@@ -110,7 +110,6 @@ DaviEventos Frontend proporciona una interfaz moderna y funcional para la gesti�
 - Implementaci처n de pruebas unitarias con Jest o Jasmine
 - Adaptaci처n para PWA (Progressive Web App)
 - Integraci처n con notificaciones push
-- Implementaci처n de temas oscuro/claro
 - Optimizaci처n de rendimiento para carga inicial
 
 ---
