@@ -82,18 +82,6 @@ src/
 - **Modales de Confirmación**: Para acciones críticas como eliminación
 - **Navegación Intuitiva**: Menú contextual y breadcrumbs
 
-## Uso de IA en el Desarrollo
-
-Durante el desarrollo de DaviEventos se utilizó GitHub Copilot para:
-
-1. **Generación de Código Base**: Creación rápida de componentes, servicios e interfaces
-2. **Optimización de Validaciones**: Implementación de validadores personalizados
-3. **Debugging**: Identificación y resolución de errores
-4. **Documentación**: Generación de comentarios y documentación técnica
-5. **Patrones de Diseño**: Sugerencias para implementar mejores prácticas de Angular
-
-La IA funcionó como un par programador, acelerando el desarrollo pero siempre bajo supervisión humana para garantizar la calidad y coherencia del código.
-
 ## Funcionalidades Destacadas
 
 ### Sistema de Autenticación
