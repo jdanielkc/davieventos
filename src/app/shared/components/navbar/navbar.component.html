@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">DaviEventos</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" *ngIf="authService.isLoggedIn">
+          <a class="nav-link" routerLink="/events" routerLinkActive="active">Eventos</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn">
+          <a class="nav-link" routerLink="/reservations" routerLinkActive="active">Mis Reservas</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn">
+          <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categorías</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav" *ngIf="authService.isLoggedIn">
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" ngbDropdownToggle id="navbarDropdown" role="button">
+            {{ authService.currentUserValue?.firstName }}
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+            <a ngbDropdownItem routerLink="/profile">Mi Perfil</a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem (click)="logout()">Cerrar Sesión</a>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav" *ngIf="!authService.isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth/register" routerLinkActive="active">Registrarse</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

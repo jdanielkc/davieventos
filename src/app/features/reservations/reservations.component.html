@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h2>Mis Reservas</h2>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="success" class="alert alert-success">
+    {{ success }}
+  </div>
+
+  <div *ngIf="!loading && !reservations.length" class="alert alert-info">
+    No tienes reservas. Explora los eventos para realizar una reserva.
+  </div>
+
+  <div class="table-responsive" *ngIf="reservations.length">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Fecha de reserva</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.eventTitle }}</td>
+          <td>{{ reservation.reservationDate | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-warning': reservation.status === 'PENDIENTE',
+              'bg-success': reservation.status === 'CONFIRMADA',
+              'bg-danger': reservation.status === 'CANCELADA'
+            }">{{ reservation.status }}</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger" (click)="openCancelModal(cancelModal, reservation)"
+              *ngIf="reservation.status !== 'CANCELADA'" [disabled]="cancelingReservationId === reservation.id">
+              <span *ngIf="cancelingReservationId === reservation.id"
+                class="spinner-border spinner-border-sm me-1"></span>
+              Cancelar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Template del modal -->
+<ng-template #cancelModal let-modal>
+  <div class="modal-header bg-danger text-white">
+    <h5 class="modal-title">Confirmar cancelación</h5>
+    <button type="button" class="btn-close btn-close-white" aria-label="Cerrar" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <p>¿Estás seguro que deseas cancelar tu reserva para <strong>{{ selectedReservation?.eventTitle }}</strong>?</p>
+    <p class="text-danger">Esta acción no puede deshacerse.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+      Volver
+    </button>
+    <button type="button" class="btn btn-danger" [disabled]="cancelingReservationId !== undefined"
+      (click)="cancelReservation(selectedReservation!.id!)">
+      <span *ngIf="cancelingReservationId === selectedReservation?.id"
+        class="spinner-border spinner-border-sm me-1"></span>
+      Confirmar cancelación
+    </button>
+  </div>
+</ng-template>
